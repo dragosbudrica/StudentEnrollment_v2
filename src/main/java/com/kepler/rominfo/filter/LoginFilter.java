@@ -20,8 +20,8 @@ public class LoginFilter implements Filter {
 
     private static final Log LOGGER = LogFactory.getLog(LoginFilter.class);
 
-    private static final String LOGIN_PAGE = "login";
-    private static final String UNAUTHORIZED = "accessDenied";
+    private static final String LOGIN_PAGE = "/login.jsp";
+    private static final String UNAUTHORIZED = "/accessDenied.jsp";
 
     private static Map<String, ArrayList<String>> rights = Authorization.getRights();
 
