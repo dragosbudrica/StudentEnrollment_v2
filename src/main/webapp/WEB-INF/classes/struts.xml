@@ -6,10 +6,36 @@
 
 <struts>
     <constant name="struts.devMode" value="true"/>
-    <package name="authentication" extends="json-default">
+    <package name="account" extends="json-default, struts-default">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+
         <action name="login" class="com.kepler.rominfo.action.LoginAction">
-            <result name="success" type="json" />
-            <result name="error" type="json" />
+            <result name="Register" type="tiles">newAccount</result>
+            <result name="AllCourses" type="tiles">allCourses</result>
+            <result name="ProfessorCourses" type="tiles">professorCourses</result>
+            <result name="Wrong password!">/login.jsp</result>
+            <result name="Invalid email!">/login.jsp</result>
+        </action>
+
+        <action name="logout" class="com.kepler.rominfo.action.LogoutAction">
+            <result name="success">/login.jsp</result>
+        </action>
+
+         <action name="newAccount" class="com.kepler.rominfo.action.NewAccountAction">
+             <result name="success" type="json" />
+             <result name="error" type="json" />
+         </action>
+    </package>
+
+    <package name="course" extends="json-default, struts-default">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+
+        <action name="getAllCourses" class="com.kepler.rominfo.action.CourseAction">
+
         </action>
     </package>
 </struts>
