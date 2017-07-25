@@ -12,6 +12,21 @@
 <head>
     <link rel="stylesheet" href="/css/addNewCourse.css"/>
     <script type="text/javascript" src="/jquery/js/jquery-3.2.1.min.js"></script>
+    <script>
+        function countChar(val) {
+            var max = 255;
+            var charNum =  $('#charNum');
+            var len = val.value.length;
+            if (len >= max) {
+                charNum.text('You have reached the limit');
+                charNum.css('color', 'red');
+            } else {
+                var chars = max - len;
+                charNum.text(chars + " characters remaining");
+                charNum.css('color', 'green');
+            }
+        };
+    </script>
     <script type="text/javascript" src="/js/addNewCourse.js"></script>
 </head>
 <body>
@@ -43,8 +58,9 @@
             <!--Description-->
             <div class="input_with_error">
                 <label for="newCourse_description">Description</label>
-                <textarea id="newCourse_description" rows="5" cols="57" name="description"></textarea>
+                <textarea id="newCourse_description" rows="5" cols="57" name="description" maxlength="255" style="resize: none" onkeyup="countChar(this)"></textarea>
                 <span class="error">This field is required</span>
+                <div id="charNum"></div>
             </div>
 
             <button type="button" id="submit">Add Course</button>

@@ -1,10 +1,10 @@
 package com.kepler.rominfo.filter;
 
-import com.kepler.rominfo.action.LoginAction;
 import com.kepler.rominfo.model.User;
 import com.kepler.rominfo.utils.Authorization;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,9 @@ import java.util.Map;
 /**
  * Created by Dragos on 30.06.2017.
  */
-public class LoginFilter implements Filter {
+public class AuthenticationFilter implements Filter {
 
-    private static final Log LOGGER = LogFactory.getLog(LoginFilter.class);
+    private static final Log LOGGER = LogFactory.getLog(AuthenticationFilter.class);
 
     private static final String LOGIN_PAGE = "/login.jsp";
     private static final String UNAUTHORIZED = "/accessDenied.jsp";
@@ -33,7 +33,6 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-        // managed bean name is exactly the session attribute name
         User user = (User) httpServletRequest
                 .getSession().getAttribute("user");
 

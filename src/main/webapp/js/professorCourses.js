@@ -38,7 +38,7 @@ function fetchGridData() {
             for (var i = 0; i < data.professorCourses.length; i++) {
                 var item = data.professorCourses[i];
                 gridArrayData.push({
-                    courseName: "<a href=\"secured\\courseDetails.action?courseCode="+item.courseCode+"\">"+item.courseName+"</a>",
+                    courseName: "<a href=\"courseDetails.action?courseCode="+item.courseCode+"\">"+item.courseName+"</a>",
                     category: item.category
                 });
             }
