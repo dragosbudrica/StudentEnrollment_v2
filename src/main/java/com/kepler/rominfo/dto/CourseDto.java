@@ -7,6 +7,7 @@ import java.util.Date;
  * Created by Dragos on 10.07.2017.
  */
 public class CourseDto implements Serializable {
+    private long courseCode;
     private String courseName;
     private String category;
     private String professor;
@@ -14,6 +15,14 @@ public class CourseDto implements Serializable {
     private Date endTime;
     private String description;
     private int numberOfLectures;
+
+    public CourseDto() {}
+
+    public CourseDto(String courseName, Date startTime, Date endTime) {
+        this.courseName = courseName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     public int getNumberOfLectures() {
         return numberOfLectures;
@@ -69,5 +78,13 @@ public class CourseDto implements Serializable {
 
     public void setProfessor(String professor) {
         this.professor = professor;
+    }
+
+    public long getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(long courseCode) {
+        this.courseCode = courseCode;
     }
 }

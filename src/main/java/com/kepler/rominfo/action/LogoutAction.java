@@ -15,12 +15,10 @@ import java.util.Map;
 public class LogoutAction extends ActionSupport {
     private static final Log LOGGER = LogFactory.getLog(LogoutAction.class);
 
-    public String execute() {
-        // invalidate the session
+    public String logout() {
         Map<String, Object> session = ActionContext.getContext().getSession();
         LOGGER.debug("invalidating session for " + ((User) session.get("user")).getEmail());
         session.remove("user");
-
         return SUCCESS;
     }
 }

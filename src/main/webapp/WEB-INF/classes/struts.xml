@@ -6,36 +6,162 @@
 
 <struts>
     <constant name="struts.devMode" value="true"/>
-    <package name="account" extends="json-default, struts-default">
+    <constant name="struts.multipart.maxSize" value="1000000" />
+
+    <package name="default" extends="json-default, struts-default">
+
         <result-types>
-            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
         </result-types>
 
+        <interceptors>
+            <interceptor-stack name="jsonStack">
+                <interceptor-ref name="json">
+                    <param name="enableSMD">true</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
         <action name="login" class="com.kepler.rominfo.action.LoginAction">
-            <result name="Register" type="tiles">newAccount</result>
-            <result name="AllCourses" type="tiles">allCourses</result>
-            <result name="ProfessorCourses" type="tiles">professorCourses</result>
+            <result name="New Account" type="redirectAction">newAccount</result>
+            <result name="AllCourses" type="redirectAction">allCourses</result>
+            <result name="ProfessorCourses" type="redirectAction">professorCourses</result>
             <result name="Wrong password!">/login.jsp</result>
             <result name="Invalid email!">/login.jsp</result>
         </action>
 
-        <action name="logout" class="com.kepler.rominfo.action.LogoutAction">
-            <result name="success">/login.jsp</result>
+        <action name="logout" class="com.kepler.rominfo.action.LogoutAction" method="logout">
+            <result name="success" type="redirect">/login.jsp</result>
         </action>
 
-         <action name="newAccount" class="com.kepler.rominfo.action.NewAccountAction">
-             <result name="success" type="json" />
-             <result name="error" type="json" />
-         </action>
-    </package>
-
-    <package name="course" extends="json-default, struts-default">
-        <result-types>
-            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
-        </result-types>
-
-        <action name="getAllCourses" class="com.kepler.rominfo.action.CourseAction">
-
+        <action name="addNewAccount" class="com.kepler.rominfo.action.NewAccountAction" method="newAccount">
+            <interceptor-ref name="jsonStack"></interceptor-ref>
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
         </action>
+
+        <action name="getAllCourses" class="com.kepler.rominfo.action.CourseAction" method="allCourses">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="getProfessorCourses" class="com.kepler.rominfo.action.CourseAction" method="professorCourses">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="getStudentCourses" class="com.kepler.rominfo.action.CourseAction" method="studentCourses">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="enroll" class="com.kepler.rominfo.action.EnrollmentAction" method="enroll">
+            <interceptor-ref name="jsonStack"></interceptor-ref>
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="courseDetails" class="com.kepler.rominfo.action.LectureAction" method="courseName">
+            <result type="tiles">courseDetails</result>
+        </action>
+
+        <action name="getLectures" class="com.kepler.rominfo.action.LectureAction" method="lectures">
+            <interceptor-ref name="jsonStack"></interceptor-ref>
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="download" class="com.kepler.rominfo.action.DownloadAction" method="downloadLecture">
+            <result name="success" type="stream">
+                <param name="contentType">application/pdf</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+            </result>
+        </action>
+
+        <action name="upload" class="com.kepler.rominfo.action.UploadAction" method="uploadLecture">
+            <interceptor-ref name="exception"/>
+            <interceptor-ref name="i18n"/>
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">application/pdf</param>
+                <param name="maximumSize">533994</param>
+            </interceptor-ref>
+            <interceptor-ref name="params">
+                <param name="excludeParams">dojo\..*,^struts\..*</param>
+            </interceptor-ref>
+            <interceptor-ref name="validation">
+                <param name="excludeMethods">input,back,cancel,browse</param>
+            </interceptor-ref>
+            <interceptor-ref name="workflow">
+                <param name="excludeMethods">input,back,cancel,browse</param>
+            </interceptor-ref>
+            <result type="redirectAction" name="success">
+                <param name="actionName">courseDetails</param>
+                <param name="courseCode">${courseCode}</param>
+            </result>
+        </action>
+
+        <action name="remove" class="com.kepler.rominfo.action.RemoveAction" method="removePdf">
+            <result type="redirectAction" name="success">
+                <param name="actionName">courseDetails</param>
+                <param name="courseCode">${courseCode}</param>
+            </result>
+        </action>
+
+        <action name="addNewCourse" class="com.kepler.rominfo.action.NewCourseAction" method="newCourse">
+            <interceptor-ref name="jsonStack"></interceptor-ref>
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="getEvents" class="com.kepler.rominfo.action.TimetableAction" method="events">
+            <result name="success" type="json"/>
+            <result name="Under Construction" type="json"/>
+        </action>
+
+        <action name="getCourses" class="com.kepler.rominfo.action.CourseSchedulingAction" method="events">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="getCourseTitles" class="com.kepler.rominfo.action.CourseSchedulingAction" method="courseTitles">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="schedule" class="com.kepler.rominfo.action.CourseSchedulingAction" method="schedule">
+            <interceptor-ref name="jsonStack"></interceptor-ref>
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+
+        <action name="studentCourses">
+            <result type="tiles">studentCourses</result>
+        </action>
+
+        <action name="professorCourses">
+            <result type="tiles">professorCourses</result>
+        </action>
+
+        <action name="allCourses">
+            <result type="tiles">allCourses</result>
+        </action>
+
+        <action name="newAccount">
+            <result type="tiles">newAccount</result>
+        </action>
+
+        <action name="newCourse">
+            <result type="tiles">newCourse</result>
+        </action>
+
+        <action name="timetable">
+            <result type="tiles">timetable</result>
+        </action>
+
+        <action name="courseScheduling">
+            <result type="tiles">courseScheduling</result>
+        </action>
+
     </package>
 </struts>

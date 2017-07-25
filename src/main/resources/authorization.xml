@@ -3,7 +3,7 @@
     <role id="Admin">
         <pages>
             <page>courseScheduling</page>
-            <page>register</page>
+            <page>newAccount</page>
         </pages>
     </role>
     <role id="Professor">

@@ -28,7 +28,7 @@
         <association property="professor" resultMap="ProfessorResult" columnPrefix="prof_"/>
     </resultMap>
 
-    <select id="getCourseByCode" parameterType="int" resultMap="CourseResult">
+    <select id="getCourseByCode" parameterType="long" resultMap="CourseResult">
         SELECT
         c."coursecode" as courseCode, c."coursename" AS courseName, c."category" AS category, c."professorid" AS professorId
         FROM public."course" c
@@ -38,7 +38,7 @@
     <select id="getCourseByName" parameterType="java.lang.String" resultMap="CourseResult">
         SELECT
         c."coursecode" as courseCode, c."coursename" AS courseName, c."category" AS category,
-        c."description" as description, c.numberoflectures as numberOfLectures
+        c."description" as description, c.numberoflectures as numberOfLectures, c."starttime" as startTime
         FROM public."course" c
         WHERE c."coursename"=#{courseName}
     </select>
@@ -97,13 +97,20 @@
     </select>
 
 
-    <select id="getProfessorCourses" resultMap="CourseResultProf">
+    <select id="getProfessorCourses" resultMap="CourseResult">
         SELECT
         c."coursecode" AS courseCode,
         c."coursename" AS courseName,
-        c."category" AS category
+        c."category" AS category,
+        u."firstname" as prof_firstname,
+        u."lastname" as prof_lastname,
+        u."userid" as prof_userid
         FROM public."course" c
-        WHERE c."professorid" = #{professorId}
+        INNER JOIN professor p
+        ON c.professorid = p.professorId
+        INNER JOIN public."user" u
+        ON p.userid = u.userid
+        WHERE p."professorid" = #{professorId}
     </select>
 
     <update id="updateCourseSchedule" >

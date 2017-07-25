@@ -26,29 +26,25 @@ public class LectureService {
         return lectureMapper.getLectures(courseCode);
     }
 
-  /*  public void uploadFile(UploadedFile file, long lectureId) {
+    public void uploadFile(byte[] file, long lectureId) {
         try {
             if (file != null) {
-                lectureMapper.uploadPDF(file., lectureId);
-                addSuccessMessage("Upload successfully!");
+                lectureMapper.uploadPDF(file, lectureId);
             }
         } catch (Exception ex) {
-            addErrorMessage(ex);
             ex.printStackTrace();
         }
     }
 
-    private void addSuccessMessage(String s) {
-        FacesMessage message = new FacesMessage(s);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
-    private void addErrorMessage(Exception exc) {
-        FacesMessage message = new FacesMessage("Error: " + exc.getMessage());
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
     public Lecture getLectureByNameAndCourseCode(long courseCode, String lectureName) {
             return lectureMapper.getLectureByNameAndCourseCode(courseCode, lectureName);
-    }*/
+    }
+
+    public Lecture getLectureById(long lectureId) {
+        return lectureMapper.getLectureById(lectureId);
+    }
+
+    public void removeLectureAttachment(long lectureId) {
+        lectureMapper.removeLectureAttachment(lectureId);
+    }
 }

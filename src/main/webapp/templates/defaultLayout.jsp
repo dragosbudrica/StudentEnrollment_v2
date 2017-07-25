@@ -21,7 +21,7 @@
 		</section>
 			
 		<section id="site-content">
-			<tiles:insertAttribute name="body" />
+ 			<tiles:insertAttribute name="body" />
 		</section>
 		
 		<footer id="footer">
