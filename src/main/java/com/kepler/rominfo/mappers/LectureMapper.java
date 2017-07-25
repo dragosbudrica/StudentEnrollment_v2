@@ -15,4 +15,6 @@ public interface LectureMapper {
     List<Lecture> getLectures(@Param("courseCode") long courseCode);
     void uploadPDF(@Param("file") byte[] file, @Param("lectureId") long lectureId);
     Lecture getLectureByNameAndCourseCode(@Param("courseCode") long courseCode, @Param("lectureName") String lectureName);
+    Lecture getLectureById(long lectureId);
+    void removeLectureAttachment(@Param("lectureId") long lectureId);
 }

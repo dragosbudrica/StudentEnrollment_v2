@@ -12,13 +12,10 @@
          pageEncoding="windows-1256"
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 <head>
     <link rel="stylesheet" href="css/login.css"/>
-          <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="jquery/js/jquery-3.2.1.min.js"></script>
     <title>Login Page</title>
 </head>
 

@@ -23,7 +23,7 @@ public class LoginAction extends ActionSupport {
 
     private static final String ALL_COURSES_REDIRECT = "AllCourses";
     private static final String PROFESSOR_COURSES_REDIRECT = "ProfessorCourses";
-    private static final String REGISTER_REDIRECT = "Register";
+    private static final String NEW_ACCOUNT_REDIRECT = "New Account";
 
     private UserService userService;
 
@@ -58,13 +58,16 @@ public class LoginAction extends ActionSupport {
             if (userService.checkCredentials(user, email, password)) {
                 Map<String, Object> session = ActionContext.getContext().getSession();
                 session.put("user", user);
-                if (user.getEmail().equals("admin")) {
-                    loginResult = REGISTER_REDIRECT;
-
-                } else if (user.getRole().equals("Professor")) {
-                    loginResult = PROFESSOR_COURSES_REDIRECT;
-                } else {
-                    loginResult = ALL_COURSES_REDIRECT;
+                switch (user.getRole()) {
+                    case "Admin":
+                        loginResult = NEW_ACCOUNT_REDIRECT;
+                        break;
+                    case "Professor":
+                        loginResult = PROFESSOR_COURSES_REDIRECT;
+                        break;
+                    default:
+                        loginResult = ALL_COURSES_REDIRECT;
+                        break;
                 }
                 LOGGER.info(loginResult);
             }

@@ -15,9 +15,9 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="/css/newAccount.css"/>
-    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="/js/newAccount.js"></script>
+    <link rel="stylesheet" href="/css/addNewAccount.css"/>
+    <script type="text/javascript" src="/jquery/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/addNewAccount.js"></script>
 </head>
 <body>
 <div class="module form-module">
@@ -25,7 +25,7 @@
     </div>
     <div class="form">
         <h2>Create an account</h2>
-        <form id="newAccount" action="newAccount">
+        <form id="newAccount">
             <!--First Name-->
             <div class="input_with_error">
                 <label for="newAccount_firstName">First Name</label>

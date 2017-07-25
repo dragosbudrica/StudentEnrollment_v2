@@ -33,12 +33,27 @@
 
     <select id="getLectureByNameAndCourseCode" resultMap="LectureResult">
         SELECT
-        l."lectureid"  AS lectureId,
-        l."name"  AS name,
-        l."attachment" AS attachment
+            l."lectureid"  AS lectureId,
+            l."name"       AS name,
+            l."attachment" AS attachment
         FROM public."lecture" l
         WHERE l."coursecode" = #{courseCode}
-        AND l."name" = #{lectureName}
+              AND l."name" = #{lectureName}
     </select>
+
+    <select id="getLectureById" resultMap="LectureResult">
+        SELECT
+            l."lectureid"  AS lectureId,
+            l."name"       AS name,
+            l."attachment" AS attachment
+        FROM public."lecture" l
+        WHERE l."lectureid" = #{lectureId}
+    </select>
+
+    <update id="removeLectureAttachment">
+        UPDATE lecture
+        SET attachment = NULL
+        WHERE lectureid = #{lectureId}
+    </update>
 
 </mapper>

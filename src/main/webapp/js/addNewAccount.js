@@ -143,18 +143,22 @@ function createAccount() {
                 var email = $('#newAccount_email').val();
                 var password = $('#newAccount_password').val();
                 var role = $('#role').val();
+
+                var jsonParams = JSON.stringify({
+                    'firstName': firstName,
+                    'lastName': lastName,
+                    'ssn': ssn,
+                    'email': email,
+                    'password': password,
+                    'role': role
+                });
+
                 $.ajax({
-                    url: 'newAccount.action',
+                    url: 'addNewAccount.action',
                     type: 'POST',
-                    data: {
-                        firstName: firstName,
-                        lastName: lastName,
-                        ssn: ssn,
-                        email: email,
-                        password: password,
-                        role: role
-                    },
-                    traditional: true,
+                    data: jsonParams,
+                    dataType: "json",
+                    contentType: 'application/json',
                     success: function (data) {
                         var message = $('#message');
                         if (data.newAccountResult === "Account creation successful!") {

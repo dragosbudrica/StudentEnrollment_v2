@@ -17,7 +17,7 @@
 
     <definition name="newAccount" extends="base-definition">
         <put-attribute name="title" value="Create New Account" />
-        <put-attribute name="body" value="/secured/newAccount.jsp" />
+        <put-attribute name="body" value="/secured/addNewAccount.jsp" />
     </definition>
 
     <definition name="allCourses" extends="base-definition">
@@ -29,5 +29,31 @@
         <put-attribute name="title" value="Professor Courses"/>
         <put-attribute name="body" value="/secured/professorCourses.jsp"/>
     </definition>
+
+    <definition name="studentCourses" extends="base-definition">
+        <put-attribute name="title" value="Student Courses"/>
+        <put-attribute name="body" value="/secured/studentCourses.jsp"/>
+    </definition>
+
+    <definition name="courseDetails" extends="base-definition">
+        <put-attribute name="title" value="Course Details"/>
+        <put-attribute name="body" value="/secured/courseDetails.jsp"/>
+    </definition>
+
+    <definition name="newCourse" extends="base-definition">
+        <put-attribute name="title" value="Add New Course"/>
+        <put-attribute name="body" value="/secured/addNewCourse.jsp"/>
+    </definition>
+
+    <definition name="timetable" extends="base-definition">
+        <put-attribute name="title" value="Timetable"/>
+        <put-attribute name="body" value="/secured/timetable.jsp"/>
+    </definition>
+
+    <definition name="courseScheduling" extends="base-definition">
+        <put-attribute name="title" value="Course Scheduling"/>
+        <put-attribute name="body" value="/secured/courseScheduling.jsp"/>
+    </definition>
+
 
 </tiles-definitions>

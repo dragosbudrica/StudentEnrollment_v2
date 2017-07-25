@@ -26,7 +26,7 @@ public class NewAccountAction extends ActionSupport {
 
     private String firstName;
     private String lastName;
-    private long ssn;
+    private String ssn;
     private String email;
     private String password;
     private String role;
@@ -55,11 +55,11 @@ public class NewAccountAction extends ActionSupport {
         this.lastName = lastName;
     }
 
-    public long getSsn() {
+    public String getSsn() {
         return ssn;
     }
 
-    public void setSsn(long ssn) {
+    public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
@@ -87,10 +87,11 @@ public class NewAccountAction extends ActionSupport {
         this.role = role;
     }
 
-    public String execute() {
+    public String newAccount() {
+        LOGGER.info(email);
         User user = userService.findUser(email);
         if(user == null) {
-            userService.addUser(firstName, lastName, ssn, email, password, role);
+            userService.addUser(firstName, lastName, Long.parseLong(ssn), email, password, role);
             LOGGER.info("register successful for " + email);
             newAccountResult = "Account creation successful!";
             return SUCCESS;
