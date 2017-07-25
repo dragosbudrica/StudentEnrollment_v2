@@ -31,7 +31,6 @@
     <script type="text/javascript" src="/js/courseDetails.js"></script>
 </head>
 
-
 <body>
 <div id="courseDetails">
     <table id="grid"></table>

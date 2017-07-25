@@ -19,9 +19,9 @@ public class Authorization {
 
     public static Map<String, ArrayList<String>> getRights() {
         Map<String, ArrayList<String>> authorizations = new HashMap<>();
-        ArrayList<String> adminPages = new ArrayList<String>();
-        ArrayList<String> professorPages = new ArrayList<String>();
-        ArrayList<String> studentPages = new ArrayList<String>();
+        ArrayList<String> adminActions = new ArrayList<String>();
+        ArrayList<String> professorActions = new ArrayList<String>();
+        ArrayList<String> studentActions = new ArrayList<String>();
 
         try {
             File inputFile = new File(new Authorization().getClass().getClassLoader().getResource("authorization.xml").getFile());
@@ -36,21 +36,21 @@ public class Authorization {
                 if (role.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) role;
                     String userRole = eElement.getAttribute("id");
-                    NodeList pages = eElement.getElementsByTagName("page");
-                    for (int pageIndex = 0; pageIndex < pages.getLength(); pageIndex++) {
-                        Node page = pages.item(pageIndex);
-                        if (page.getNodeType() == Node.ELEMENT_NODE) {
-                            Element eElement2 = (Element) page;
-                            String pageAllowed = eElement2.getTextContent();
+                    NodeList actions = eElement.getElementsByTagName("action");
+                    for (int actionIndex = 0; actionIndex < actions.getLength(); actionIndex++) {
+                        Node action = actions.item(actionIndex);
+                        if (action.getNodeType() == Node.ELEMENT_NODE) {
+                            Element eElement2 = (Element) action;
+                            String actionAllowed = eElement2.getTextContent();
                             switch (userRole) {
                                 case "Admin":
-                                    adminPages.add(pageAllowed);
+                                    adminActions.add(actionAllowed);
                                     break;
                                 case "Professor":
-                                    professorPages.add(pageAllowed);
+                                    professorActions.add(actionAllowed);
                                     break;
                                 default:
-                                    studentPages.add(pageAllowed);
+                                    studentActions.add(actionAllowed);
                                     break;
                             }
                         }
@@ -61,9 +61,9 @@ public class Authorization {
             e.printStackTrace();
         }
 
-        authorizations.put("Admin", adminPages);
-        authorizations.put("Professor", professorPages);
-        authorizations.put("Student", studentPages);
+        authorizations.put("Admin", adminActions);
+        authorizations.put("Professor", professorActions);
+        authorizations.put("Student", studentActions);
 
         return authorizations;
     }

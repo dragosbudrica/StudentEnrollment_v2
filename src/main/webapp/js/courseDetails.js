@@ -73,7 +73,8 @@ function fetchGridData(role) {
                 } else if(item.file === null && role === 'Professor') {
                     gridArrayData.push({
                         lectureName: item.lectureName,
-                        pdf: "<form action=\"upload.action?lectureId=" + item.lectureId + "&courseCode=" + courseCode + "\" method=\"POST\" enctype=\"multipart/form-data\"> <input value=\"Upload PDF\" name=\"fileUpload\" type=\"file\" /> <input type=\"submit\" value=\"Upload\"> </form>"
+                       /* pdf: "<form action=\"upload.action?lectureId=" + item.lectureId + "&courseCode=" + courseCode + "\" method=\"POST\" enctype=\"multipart/form-data\"> <input value=\"Upload PDF\" name=\"fileUpload\" type=\"file\" /> <input type=\"submit\" value=\"Upload\"> </form>"*/
+                        pdf: "<form action=\"upload.action?lectureId=" + item.lectureId + "&courseCode=" + courseCode + "\" method=\"POST\" enctype=\"multipart/form-data\"> <input value=\"Upload PDF\" name=\"fileUpload\" type=\"file\" onchange=\"submit()\"/> </form>"
                 });
                 } else if(item.file !== null && role === 'Professor'){
                     gridArrayData.push({

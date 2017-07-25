@@ -6,7 +6,7 @@ $(document).ready(function () {
 function getEvents() {
     var index;
     $.ajax({
-        url: 'getCourses.action',
+        url: 'getCourseEvents.action',
         type: 'GET',
         dataType: 'json',
         traditional: true,

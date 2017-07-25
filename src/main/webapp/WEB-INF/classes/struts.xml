@@ -119,7 +119,7 @@
             <result name="Under Construction" type="json"/>
         </action>
 
-        <action name="getCourses" class="com.kepler.rominfo.action.CourseSchedulingAction" method="events">
+        <action name="getCourseEvents" class="com.kepler.rominfo.action.CourseSchedulingAction" method="events">
             <result name="success" type="json"/>
             <result name="error" type="json"/>
         </action>
